@@ -1,0 +1,168 @@
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Flower Gallery</title>
+  <style>
+ 
+    body {
+      font-family: sans-serif;
+      background-color: #FFB6C1;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    header {
+      background-color: #C71585;
+      color: white;
+      padding: 20px 0;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 42px;
+    }
+
+   
+    .photo-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 30px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .photo-gallery img {
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease-in-out;
+      cursor: pointer;
+    }
+
+    .photo-gallery img:hover {
+      transform: scale(1.07);
+    }
+
+  
+    .lightbox-overlay {
+      position: fixed;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 1000;
+      flex-direction: column;
+    }
+
+    .lightbox-image {
+      max-width: 90%;
+      max-height: 80%;
+      border-radius: 10px;
+    }
+
+    .close-button {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 40px;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .nav-buttons {
+      color: white;
+      font-size: 36px;
+      margin-top: 20px;
+    }
+
+    .nav-buttons span {
+      margin: 0 15px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    footer {
+      background-color: #FFB6C1;
+      color: white;
+      padding: 10px 0;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+    <header>
+    <h1>My Flower Gallery</h1>
+  </header>
+
+ 
+  <section class="photo-gallery">
+    <img src="flower/rose.jpg" alt="Red Rose in Bloom">
+    <img src="flower/sunflower.jpg" alt="Bright Sunflower Facing the Sun">
+    <img src="flower/lotus.jpg" alt="Pink Lotus in a Pond">
+    <img src="flower/hybiscus.jpg" alt="Red Hibiscus Close-Up">
+    <img src="flower/lily.jpg" alt="White Lily on Green Background">
+    <img src="flower/malli.jpg" alt="Fragrant Jasmine Flowers">
+    <img src="flower/iris.jpg" alt="Purple Iris Blooming">
+    <img src="flower/al.jpg" alt="Purple Iris Blooming">
+  </section>
+  <div class="lightbox-overlay" id="lightbox">
+    <span class="close-button" id="closeBtn">&times;</span>
+    <img class="lightbox-image" id="lightboxImg" src="" alt="Full-size flower image" />
+    <div class="nav-buttons">
+      <span id="prevBtn">&#8592;</span>
+      <span id="nextBtn">&#8594;</span>
+    </div>
+  </div>
+
+  
+  <footer>
+    Made by [DHARSHINI] — All flower images © their owners.
+  </footer>
+
+  <script>
+    
+    const images = document.querySelectorAll(".photo-gallery img");
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightboxImg");
+    const closeBtn = document.getElementById("closeBtn");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+
+    let currentIndex = 0;
+
+    images.forEach((img, index) => {
+      img.addEventListener("click", () => {
+        lightbox.style.display = "flex";
+        lightboxImg.src = img.src;
+        currentIndex = index;
+      });
+    });
+
+
+    closeBtn.addEventListener("click", () => {
+      lightbox.style.display = "none";
+    });
+
+       prevBtn.addEventListener("click", () => {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      lightboxImg.src = images[currentIndex].src;
+    });
+
+      nextBtn.addEventListener("click", () => {
+      currentIndex = (currentIndex + 1) % images.length;
+      lightboxImg.src = images[currentIndex].src;
+    });
+
+       document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        lightbox.style.display = "none";
+      }
+    });
+  </script>
+</body>
+</html>
