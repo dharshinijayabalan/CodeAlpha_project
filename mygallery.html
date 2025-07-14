@@ -2,9 +2,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Flower Gallery</title>
+  <title>My Gallery</title>
   <style>
- 
     body {
       font-family: sans-serif;
       background-color: #FFB6C1;
@@ -24,10 +23,29 @@
       font-size: 42px;
     }
 
-   
+    .filters {
+      margin-top: 20px;
+    }
+
+    .filters button {
+      background-color: #C71585;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin: 5px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.3s;
+    }
+
+    .filters button:hover {
+      background-color: #A0146E;
+    }
+
     .photo-gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(4, 1fr); /* Exactly 4 columns */
       gap: 20px;
       padding: 30px;
       max-width: 1100px;
@@ -36,6 +54,8 @@
 
     .photo-gallery img {
       width: 100%;
+      max-width: 250px;
+      margin: 0 auto;
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.2);
       transition: transform 0.3s ease-in-out;
@@ -46,7 +66,12 @@
       transform: scale(1.07);
     }
 
-  
+
+    @media (max-width: 700px) {
+      .photo-gallery {
+        grid-template-columns: repeat(2, 1fr);       }
+    }
+
     .lightbox-overlay {
       position: fixed;
       display: none;
@@ -95,21 +120,37 @@
 </head>
 <body>
 
-    <header>
-    <h1>My Flower Gallery</h1>
+  <header>
+    <h1>My Gallery</h1>
   </header>
 
- 
+  <div class="filters">
+    <button onclick="filterImages('all')">All</button>
+    <button onclick="filterImages('rose')">Rose</button>
+    <button onclick="filterImages('sunflower')">Sunflower</button>
+    <button onclick="filterImages('lotus')">Lotus</button>
+    <button onclick="filterImages('hibiscus')">Hibiscus</button>
+    <button onclick="filterImages('lily')">Lily</button>
+    <button onclick="filterImages('jasmine')">Jasmine</button>
+    <button onclick="filterImages('iris')">Iris</button>
+  </div>
+
   <section class="photo-gallery">
-    <img src="flower/rose.jpg" alt="Red Rose in Bloom">
-    <img src="flower/sunflower.jpg" alt="Bright Sunflower Facing the Sun">
-    <img src="flower/lotus.jpg" alt="Pink Lotus in a Pond">
-    <img src="flower/hybiscus.jpg" alt="Red Hibiscus Close-Up">
-    <img src="flower/lily.jpg" alt="White Lily on Green Background">
-    <img src="flower/malli.jpg" alt="Fragrant Jasmine Flowers">
-    <img src="flower/iris.jpg" alt="Purple Iris Blooming">
-    <img src="flower/al.jpg" alt="Purple Iris Blooming">
+    <img src="flower/rose.jpg" class="flower rose" alt="Red Rose in Bloom">
+    <img src="flower/sunflower.jpg" class="flower sunflower" alt="Bright Sunflower">
+    <img src="flower/lotus.jpg" class="flower lotus" alt="Pink Lotus in a Pond">
+    <img src="flower/hybiscus.jpg" class="flower hibiscus" alt="Red Hibiscus Close-Up">
+    <img src="flower/lily.jpg" class="flower lily" alt="White Lily on Green Background">
+    <img src="flower/malli.jpg" class="flower jasmine" alt="Fragrant Jasmine Flowers">
+    <img src="flower/iris.jpg" class="flower iris" alt="Purple Iris Blooming">
+    <img src="flower/al.jpg" class="flower iris" alt="Purple Iris Blooming">
+    <img src="flower/rose1.jpg" class="flower rose" alt="Red Rose in Bloom">
+    <img src="flower/lotus1.jpg" class="flower lotus" alt="Pink Lotus in a Pond">
+    <img src="flower/sunflower1.jpg" class="flower sunflower" alt="Bright Sunflower">
+    <img src="flower/hybiscus1.jpg" class="flower hibiscus" alt="Red Hibiscus Close-Up">
+
   </section>
+
   <div class="lightbox-overlay" id="lightbox">
     <span class="close-button" id="closeBtn">&times;</span>
     <img class="lightbox-image" id="lightboxImg" src="" alt="Full-size flower image" />
@@ -119,13 +160,11 @@
     </div>
   </div>
 
-  
   <footer>
     Made by [DHARSHINI] — All flower images © their owners.
   </footer>
 
   <script>
-    
     const images = document.querySelectorAll(".photo-gallery img");
     const lightbox = document.getElementById("lightbox");
     const lightboxImg = document.getElementById("lightboxImg");
@@ -143,26 +182,35 @@
       });
     });
 
-
     closeBtn.addEventListener("click", () => {
       lightbox.style.display = "none";
     });
 
-       prevBtn.addEventListener("click", () => {
+    prevBtn.addEventListener("click", () => {
       currentIndex = (currentIndex - 1 + images.length) % images.length;
       lightboxImg.src = images[currentIndex].src;
     });
 
-      nextBtn.addEventListener("click", () => {
+    nextBtn.addEventListener("click", () => {
       currentIndex = (currentIndex + 1) % images.length;
       lightboxImg.src = images[currentIndex].src;
     });
 
-       document.addEventListener("keydown", (e) => {
+    document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") {
         lightbox.style.display = "none";
       }
     });
+
+    function filterImages(category) {
+      images.forEach(img => {
+        if (category === 'all' || img.classList.contains(category)) {
+          img.style.display = '';
+        } else {
+          img.style.display = 'none';
+        }
+      });
+    }
   </script>
 </body>
 </html>
