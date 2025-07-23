@@ -1,40 +1,46 @@
-#  Frontend Web Projects – Gallery & Calculator
+# 💼 CodeAlpha Internship – Frontend Development Projects
 
-This repository showcases two mini-projects developed using **HTML**, **CSS**, and **JavaScript**. Both projects focus on building interactive and visually appealing web applications.
+This repository contains the tasks I completed during my **Frontend Development Internship at CodeAlpha**. The goal was to strengthen my web development skills by building responsive, interactive projects using core frontend technologies.
 
 
-## 📌 Project 1: Flower Gallery
+## 📁 Projects Included
 
-### 🎯 Task Objective
-To create a responsive **photo gallery website** with filter buttons and lightbox functionality that allows users to browse flower images in a visually engaging manner.
+1.  **Flower Gallery**  
+2.  **Web Calculator**
 
-### 🛠 Tools & Technologies Used
-- **HTML5** – Markup structure for the webpage
-- **CSS3** – Styling, layout, and responsiveness
-- **JavaScript** – Interactivity and filtering logic
+
+## 🌸 Project 1: Flower Gallery
+
+### 🎯 Task Objective  
+To build a visually attractive **photo gallery website** where users can filter images based on categories and view them in a lightbox with navigation.
+
+### 🛠️ Tools & Technologies Used
+- HTML5
+- CSS3 (Grid, Media Queries)
+- JavaScript (DOM Manipulation, Lightbox Logic)
 
 ### ✨ Features
-- Filter images by categories (Rose, Sunflower, Lotus, etc.)
-- Lightbox feature to view enlarged images
-- Previous and next navigation inside the lightbox
-- Responsive design for all screen sizes
-- Hover zoom effects on images
+- Filter buttons to view specific flower types (Rose, Lotus, etc.)
+- Lightbox popup for viewing images in large size
+- Next and previous navigation inside the lightbox
+- Mobile-friendly, responsive layout
+- Smooth hover zoom effects
 - Keyboard support (ESC to close lightbox)
 
 
-## 📌 Project 2: Calculator
+## 🧮 Project 2: Web Calculator
 
-### 🎯 Task Objective
-To develop a fully functional and responsive **web calculator** that performs basic arithmetic operations with a clean, modern UI.
+### 🎯 Task Objective  
+To create a fully functional, clean, and responsive **web calculator** that performs basic arithmetic operations with modern UI.
 
 ### 🛠️ Tools & Technologies Used
-- **HTML5** – For the calculator layout and structure
-- **CSS3** – For modern dark UI design and button styling
-- **JavaScript** – For all calculator operations and validations
+- HTML5 (for layout)
+- CSS3 (for modern, dark-themed design)
+- JavaScript (for calculations and validations)
 
 ### ✨ Features
-- Arithmetic operations: Addition, Subtraction, Multiplication, Division
-- AC (All Clear), C (Clear last entry), %, and decimal point
-- Error handling for invalid inputs
-- Responsive design for mobile and desktop use
-- Stylish dark theme with hover effects
+- Basic operations: +, −, ×, ÷
+- Additional functions: %, AC (All Clear), C (Clear Last Entry), decimal
+- Error handling for invalid expressions
+- Responsive design that works on mobile and desktop
+- Dark UI with styled buttons and hover effects
