@@ -1,0 +1,182 @@
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Calculator</title>
+  <style>
+    
+    body {
+      background: #d3d3d3; 
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+        .calculator {
+      background-color: #101010;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px #000;
+      width: 320px;
+      border: 2px solid #4caf50; 
+    }
+
+       .display {
+      background: black;
+      color: limegreen;
+      font-size: 32px;
+      text-align: right;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      min-height: 50px;
+      border: 2px solid #4caf50; 
+      box-sizing: border-box; 
+      user-select: none;
+    }
+
+       .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+
+   
+    button {
+      padding: 20px;
+      font-size: 20px;
+      border: none;
+      border-radius: 50%;
+      background-color: #222;
+      color: white;
+      cursor: pointer;
+      transition: 0.2s;
+      user-select: none;
+    }
+
+    
+    button.operator {
+      background-color: #388e3c;
+    }
+
+    button.clear {
+      background-color: #d32f2f;
+    }
+
+    button.all-clear {
+      background-color: #ff5722;
+    }
+
+    button.equal {
+      background-color: #4caf50;
+    }
+
+   
+    button:hover {
+      filter: brightness(120%);
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <div class="display" id="display">0</div>
+    <div class="buttons">
+      <button class="all-clear" onclick="clearAll()">AC</button>
+      <button class="clear" onclick="clearEntry()">C</button>
+      <button class="operator" onclick="percentage()">%</button>
+      <button class="operator" onclick="appendValue('/')">÷</button>
+
+      <button onclick="appendValue('7')">7</button>
+      <button onclick="appendValue('8')">8</button>
+      <button onclick="appendValue('9')">9</button>
+      <button class="operator" onclick="appendValue('*')">×</button>
+
+      <button onclick="appendValue('4')">4</button>
+      <button onclick="appendValue('5')">5</button>
+      <button onclick="appendValue('6')">6</button>
+      <button class="operator" onclick="appendValue('-')">−</button>
+
+      <button onclick="appendValue('1')">1</button>
+      <button onclick="appendValue('2')">2</button>
+      <button onclick="appendValue('3')">3</button>
+      <button class="operator" onclick="appendValue('+')">+</button>
+
+      <button onclick="appendValue('.')">.</button>
+      <button onclick="appendValue('0')">0</button>
+      <button class="equal" onclick="calculate()" style="grid-column: span 2;">=</button>
+    </div>
+  </div>
+
+  <script>
+        const displayElement = document.getElementById("display");
+
+    
+    function appendValue(value) {
+      
+      if (displayElement.innerText === "0" || displayElement.innerText === "Error") {
+        displayElement.innerText = value;
+      } else {
+        displayElement.innerText += value;
+      }
+    }
+
+    
+    function clearAll() {
+      displayElement.innerText = "0";
+    }
+
+        function clearEntry() {
+           if (displayElement.innerText === "Error" || displayElement.innerText.length === 1) {
+        displayElement.innerText = "0";
+      } else {
+        displayElement.innerText = displayElement.innerText.slice(0, -1);
+      }
+    }
+
+       function calculate() {
+      try {
+        const expression = displayElement.innerText;
+
+        
+        if (!/^[0-9+\-*/%.() ]+$/.test(expression)) {
+          throw new Error('Invalid characters detected');
+        }
+
+                const result = new Function('return ' + expression)();
+
+        
+        if (typeof result !== 'number' || !isFinite(result)) {
+          throw new Error('Math error');
+        }
+
+        displayElement.innerText = result;
+      } catch {
+        displayElement.innerText = "Error";
+      }
+    }
+
+        function percentage() {
+      try {
+        const expression = displayElement.innerText;
+
+        if (!/^[0-9+\-*/%.() ]+$/.test(expression)) {
+          throw new Error('Invalid characters detected');
+        }
+
+        const currentValue = new Function('return ' + expression)();
+
+        if (typeof currentValue !== 'number' || !isFinite(currentValue)) {
+          throw new Error('Math error');
+        }
+
+        displayElement.innerText = currentValue / 100;
+      } catch {
+        displayElement.innerText = "Error";
+      }
+    }
+  </script>
+</body>
+</html>
